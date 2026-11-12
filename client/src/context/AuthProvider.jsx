@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
-import api from "../services/api";
+import api, { setAuthToken } from "../services/api";
 import { AuthContext } from "./authContext";
 
 export function AuthProvider({ children }) {
@@ -24,12 +24,14 @@ export function AuthProvider({ children }) {
     loading,
     async login(identifier, password) {
       const { data } = await api.post("/auth/login", { identifier, password });
+      if (data.token) setAuthToken(data.token);
       setAdmin(data.admin);
     },
     async logout() {
       try {
         await api.post("/auth/logout");
       } finally {
+        setAuthToken(null);
         setAdmin(null);
       }
     },

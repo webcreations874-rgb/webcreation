@@ -6,13 +6,30 @@ import Admin from "../models/Admin.js";
 import AuditLog from "../models/AuditLog.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
-const cookieOptions = () => ({
-  httpOnly: true,
-  secure: process.env.COOKIE_SECURE === "true" || process.env.NODE_ENV === "production",
-  sameSite: "lax",
-  path: "/",
-  maxAge: 24 * 60 * 60 * 1000
-});
+const cookieOptions = (req) => {
+  const origin = req?.get?.("origin");
+  const forwardedProto = req?.get?.("x-forwarded-proto")?.split(",")[0]?.trim();
+  const secure =
+    process.env.COOKIE_SECURE === "true" ||
+    process.env.NODE_ENV === "production" ||
+    forwardedProto === "https" ||
+    req?.protocol === "https";
+  let crossOrigin = false;
+  if (origin && req?.get?.("host")) {
+    try {
+      crossOrigin = new URL(origin).host !== req.get("host");
+    } catch {
+      crossOrigin = false;
+    }
+  }
+  return {
+    httpOnly: true,
+    secure,
+    sameSite: secure && crossOrigin ? "none" : "lax",
+    path: "/",
+    maxAge: 24 * 60 * 60 * 1000
+  };
+};
 
 export const login = asyncHandler(async (req, res) => {
   const identifier = String(req.body.identifier ?? req.body.email ?? "").trim().toLowerCase();
@@ -25,12 +42,12 @@ export const login = asyncHandler(async (req, res) => {
   const token = jwt.sign({ sub: admin.id, role: admin.role, ver: admin.sessionVersion }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN || "1d"
   });
-  res.cookie("qr_session", token, cookieOptions());
-  res.json({ admin: { id: admin.id, name: admin.name, email: admin.email, username: admin.username, role: admin.role } });
+  res.cookie("qr_session", token, cookieOptions(req));
+  res.json({ token, admin: { id: admin.id, name: admin.name, email: admin.email, username: admin.username, role: admin.role } });
 });
 
 export const logout = (req, res) => {
-  res.clearCookie("qr_session", { ...cookieOptions(), maxAge: undefined });
+  res.clearCookie("qr_session", { ...cookieOptions(req), maxAge: undefined });
   res.json({ message: "Signed out." });
 };
 
@@ -113,6 +130,6 @@ export const changePassword = asyncHandler(async (req, res) => {
   admin.sessionVersion += 1;
   await admin.save();
   await AuditLog.create({ adminId: admin.id, action: "password.changed" });
-  res.clearCookie("qr_session", { ...cookieOptions(), maxAge: undefined });
+  res.clearCookie("qr_session", { ...cookieOptions(req), maxAge: undefined });
   res.json({ message: "Password changed. Sign in again with your new password." });
 });

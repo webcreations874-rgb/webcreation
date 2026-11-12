@@ -1,0 +1,3191 @@
+
+/* =========================================
+   GLOBAL VARIABLES AND PAGE
+========================================= */
+
+.certificate-verification {
+  --cv-ink: #111827;
+  --cv-muted: #596579;
+  --cv-border: #d9dee5;
+  --cv-surface: #ffffff;
+  --cv-background: #ffffff;
+  --cv-primary: #244e7a;
+  --cv-accent: #14837d;
+
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: clip;
+  display: flex;
+  flex-direction: column;
+
+  color: var(--cv-ink);
+  background-color: var(--cv-background);
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: calc(16px * var(--cv-font-scale, 1));
+}
+
+.certificate-verification * {
+  box-sizing: border-box;
+}
+
+.certificate-verification h1,
+.certificate-verification p {
+  margin-top: 0;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.cv-header {
+  position: relative;
+  z-index: 25;
+
+  width: 100%;
+  height: 64px;
+  min-height: 64px;
+  overflow: visible;
+
+  background: #ffffff;
+  border-bottom: 0;
+}
+
+.cv-header-flag-layer {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cv-header-flag-left,
+.cv-header-flag-right {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 64px;
+  display: flex;
+  overflow: hidden;
+}
+
+.cv-header-flag-left {
+  left: 0;
+  justify-content: flex-start;
+}
+
+.cv-header-flag-right {
+  right: 0;
+  justify-content: flex-end;
+}
+
+.cv-header-flag {
+  position: absolute;
+  top: 0;
+  height: 64px;
+  width: auto;
+  object-fit: cover;
+}
+
+.cv-header-flag-left .cv-header-flag {
+  left: 0;
+  transform: scaleX(-1);
+}
+
+.cv-header-flag-right .cv-header-flag { right: 0; }
+
+@media screen and (max-width: 1440px) {
+  .cv-header-flag {
+    position: static;
+  }
+}
+
+.cv-header-emblem {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  height: 64px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center !important;
+  transform: translateX(-50%);
+}
+
+.cv-header-emblem img {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 599px) {
+  .cv-header-emblem img {
+    width: 30px;
+  }
+}
+
+.cv-header-inner {
+  width: 100%;
+  height: 64px;
+  min-height: 64px;
+
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+
+  gap: 20px;
+}
+
+/* BRAND */
+
+.cv-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 0;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+.cv-brand-mark {
+  width: 52px;
+  height: 52px;
+
+  flex: 0 0 52px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    145deg,
+    #244e7a,
+    #14837d
+  );
+
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cv-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cv-brand-copy strong {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cv-brand-copy small {
+  color: #38485a;
+  font-size: 12px;
+}
+
+/* HEADER ACTIONS */
+
+.cv-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cv-header-actions svg {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.cv-font-controls {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.cv-font-controls button,
+.cv-theme-toggle {
+  min-width: 39px;
+  height: 39px;
+
+  border: 1px solid #d8dee7;
+  border-radius: 6px;
+
+  background: #ffffff;
+  color: #222222;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.cv-font-controls button {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin: 0 4px 0 0;
+  padding: 0;
+  color: rgba(0, 0, 0, .87);
+  background: #fff;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.cv-font-controls button:hover,
+.cv-theme-toggle:hover {
+  background: #edf2f7;
+}
+
+.cv-theme-toggle {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: 0;
+  border-radius: 0;
+  color: #000;
+  background: #ffffff;
+  box-shadow: none;
+  font-size: 22px;
+}
+
+.certificate-verification .cv-theme-toggle,
+.certificate-verification .cv-theme-toggle svg {
+  color: #000 !important;
+  stroke: #000;
+}
+
+.certificate-verification .cv-theme-toggle .cv-moon-icon {
+  fill: #000;
+  stroke: #000;
+}
+
+.certificate-verification .cv-login-dropdown {
+  position: relative;
+  z-index: 30;
+}
+
+.cv-mobile-menu-toggle {
+  display: none;
+}
+
+.certificate-verification .cv-admin-link {
+  height: 36px;
+  min-height: 36px;
+  padding: 0 16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  border-radius: 4px;
+  border: 0;
+
+  background: linear-gradient(90deg, #6f8eb7 0%, #52739f 50%, #274d80 100%);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cv-admin-link-label {
+  line-height: 1;
+}
+
+.cv-admin-link-chevron {
+  font-size: 16px;
+}
+
+.cv-admin-link-icon {
+  display: none !important;
+}
+
+.certificate-verification .cv-admin-link:hover {
+  background: linear-gradient(90deg, #6281aa 0%, #466793 50%, #204270 100%);
+  color: #ffffff;
+}
+
+.certificate-verification .cv-login-menu {
+  position: absolute;
+  z-index: 50;
+  top: 100%;
+  right: 0;
+  display: block;
+  width: max-content;
+  min-width: 260px;
+  max-width: calc(100vw - 24px);
+  padding: 8px 0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  color: #222222;
+}
+
+.cv-login-option {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  color: inherit;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cv-login-option svg {
+  flex: 0 0 20px;
+  color: #757575;
+  font-size: 18px;
+}
+
+.cv-login-option:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: #222222;
+}
+
+/* =========================================
+   INDEPENDENT SERVICE NOTICE
+========================================= */
+
+.cv-independence-notice {
+  margin: 0;
+  padding: 7px 15px;
+
+  color: #435366;
+  background: #f0f3f6;
+
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.cv-nav {
+  width: 100%;
+  height: 46px;
+  background-color: #234a7d !important;
+  color: #fff;
+}
+
+.cv-nav-inner {
+  width: 100%;
+  height: 46px;
+  min-height: 46px;
+
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center !important;
+
+  gap: 2px;
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+.cv-nav-link,
+.cv-nav-label {
+  display: inline-flex;
+  width: auto;
+  height: 100%;
+  min-height: 46px;
+  padding: 0 16px;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid transparent;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cv-nav-link > *,
+.cv-nav-label > * {
+  vertical-align: middle;
+}
+
+.cv-nav-link:hover,
+.cv-nav-dropdown[open] > .cv-nav-label,
+.cv-nav-label:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-bottom-color: #8bd1c6;
+}
+
+.cv-nav-dropdown {
+  position: relative;
+}
+
+.cv-nav-dropdown > summary {
+  gap: 3px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.cv-nav-dropdown > summary::-webkit-details-marker { display: none; }
+
+.cv-nav-menu {
+  position: absolute;
+  z-index: 5;
+  top: 100%;
+  left: 0;
+  width: max-content;
+  min-width: 360px;
+  max-width: min(560px, 90vw);
+  display: grid;
+  padding: 8px 0;
+  border-radius: 0 0 4px 4px;
+  color: #222;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .24);
+  white-space: normal;
+}
+
+.cv-nav--mobile-open .cv-nav-inner:not(:empty) {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.cv-nav-dropdown--forms .cv-nav-menu {
+  min-width: 258px;
+}
+
+.cv-nav-menu span,
+.cv-nav-menu a {
+  display: block;
+  width: 100%;
+  min-height: 58px;
+  padding: 18px 20px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.cv-nav-menu a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cv-nav-menu span:hover,
+.cv-nav-menu a:hover { background: #f2f4f7; }
+
+.cv-nav-has-menu { gap: 5px; }
+
+/* =========================================
+   MAIN BACKGROUND
+========================================= */
+
+.cv-main {
+  position: relative;
+  isolation: isolate;
+
+  width: min(640px, calc(100% - 32px));
+
+  flex: 0 0 auto;
+
+  margin: 0 auto;
+  padding: 55px 0 0;
+}
+
+.cv-main::before {
+  position: absolute;
+  z-index: -2;
+
+  top: 0;
+  left: 50%;
+
+  width: 100vw;
+  height: 100%;
+
+  content: "";
+
+  transform: translateX(-50%);
+
+  background-color: #ffffff;
+  pointer-events: none;
+}
+
+.cv-watermark-pattern {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-auto-rows: 310px;
+  align-content: start;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  filter: grayscale(1);
+  opacity: 0.035;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cv-watermark-small,
+.cv-watermark-large {
+  justify-self: center;
+  object-fit: contain;
+}
+
+.cv-watermark-small {
+  width: 160px;
+  height: 160px;
+  transform: translateY(-30px);
+}
+
+.cv-watermark-large {
+  width: 230px;
+  height: 230px;
+  transform: translateY(30px);
+}
+
+/* =========================================
+   CERTIFICATE CARD
+========================================= */
+
+.cv-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+
+  padding: 28px 28px 30px;
+
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 3px 19px rgba(0, 0, 0, 0.20),
+    0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.cv-card-heading {
+  margin-bottom: 18px;
+}
+
+.cv-card-heading h1 {
+  margin: 0;
+
+  color: #172638;
+
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* =========================================
+   CERTIFICATE DETAILS TABLE
+========================================= */
+
+.cv-details-table {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+
+  border: 1px solid #d9dee5;
+  border-collapse: collapse;
+
+  background: #ffffff;
+}
+
+.cv-details-row {
+  min-height: 42px;
+
+  display: grid;
+
+  grid-template-columns: 120px minmax(0, 1fr);
+
+  border-bottom: 1px solid #d9dee5;
+
+  color: #111111;
+
+  font-size: calc(16px * var(--cv-font-scale, 1));
+  line-height: 1.5;
+}
+
+.cv-details-row:last-child {
+  border-bottom: 0;
+}
+
+.cv-details-row dt,
+.cv-details-row dd {
+  min-width: 0;
+
+  margin: 0;
+  padding: 10px 11px;
+
+  color: #111111;
+  font-weight: 400;
+
+  overflow-wrap: anywhere;
+}
+
+.cv-details-row dt {
+  border-right: 1px solid #d9dee5;
+}
+
+.cv-details-row dd {
+  background: #ffffff;
+}
+
+/* =========================================
+   DISCLAIMER
+========================================= */
+
+.cv-disclaimer {
+  margin: 18px 1px 0;
+
+  color: #596579;
+
+  font-size: calc(12px * var(--cv-font-scale, 1));
+  line-height: 1.6;
+}
+
+/* =========================================
+   LOADING AND STATUS
+========================================= */
+
+.cv-status,
+.cv-state {
+  border: 1px solid #d9dee5;
+  background: #ffffff;
+}
+
+.cv-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  margin-bottom: 18px;
+  padding: 16px;
+
+  border-radius: 5px;
+}
+
+.cv-status h1 {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cv-status p {
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cv-status-revoked,
+.cv-status-not_found,
+.cv-status-error {
+  border-color: #efceca;
+  color: #a7332c;
+  background: #fff4f2;
+}
+
+.cv-state {
+  padding: 28px 20px;
+
+  color: #596579;
+
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cv-loading-overlay {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.cv-loading-overlay--logo {
+  background: #fff;
+}
+
+.cv-loading-overlay--dots-footer,
+.cv-loading-overlay--dots-details {
+  background: rgba(25, 34, 47, .58);
+}
+
+.cv-logo-loader {
+  position: relative;
+  width: 176px;
+  height: 176px;
+  display: grid;
+  place-items: center;
+}
+
+.cv-logo-loader__ring {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 210deg,
+    rgba(28, 32, 38, .18) 0deg 120deg,
+    transparent 120deg 360deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 8px),
+    #000 calc(100% - 7px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 8px),
+    #000 calc(100% - 7px)
+  );
+  border-radius: 50%;
+  animation: cv-logo-ring-spin .9s linear infinite;
+}
+
+.cv-logo-loader img {
+  width: 130px;
+  height: 129px;
+  object-fit: contain;
+}
+
+.cv-dots-loader {
+  position: absolute;
+  width: 84px;
+  height: 84px;
+  opacity: 0;
+  animation:
+    cv-dots-orbit 1.6s linear infinite;
+}
+
+.cv-loading-overlay--dots-footer .cv-logo-loader,
+.cv-loading-overlay--dots-details .cv-logo-loader {
+  display: none;
+}
+
+.cv-loading-overlay--dots-footer .cv-dots-loader,
+.cv-loading-overlay--dots-details .cv-dots-loader {
+  opacity: 1;
+}
+
+.cv-dots-loader span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: #00bcd4;
+  transform: translate(-50%, -50%) rotate(var(--cv-dot-angle)) translateY(-34px);
+}
+
+.cv-dots-loader span:nth-child(1) { --cv-dot-angle: 270deg; width: 16px; height: 16px; opacity: .95; }
+.cv-dots-loader span:nth-child(2) { --cv-dot-angle: 315deg; width: 13px; height: 13px; opacity: .78; }
+.cv-dots-loader span:nth-child(3) { --cv-dot-angle: 225deg; width: 11px; height: 11px; opacity: .62; }
+.cv-dots-loader span:nth-child(4) { --cv-dot-angle: 180deg; width: 8px; height: 8px; opacity: .44; }
+.cv-dots-loader span:nth-child(5) { --cv-dot-angle: 135deg; width: 6px; height: 6px; opacity: .28; }
+.cv-dots-loader span:nth-child(6) { --cv-dot-angle: 90deg; width: 4px; height: 4px; opacity: .14; }
+
+.cv-loading-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes cv-logo-ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cv-dots-orbit {
+  to { transform: rotate(360deg); }
+}
+
+.cv-error-state {
+  margin-top: 18px;
+}
+
+.cv-error-state strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #172638;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.cv-footer {
+  width: 100%;
+  position: static;
+  bottom: 0;
+  margin-top: auto;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 24px;
+
+  padding: 3rem 24px 1.5rem;
+
+  color: #ffffff;
+
+  border-top: 4px solid #ccc;
+  background: radial-gradient(circle, #138f78 0, #234a7d 100%);
+
+  text-align: center;
+  font-size: 16px;
+}
+
+/* FOOTER BRAND */
+
+.cv-footer-brand-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.cv-footer-logo {
+  width: 45px;
+  height: 45px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.cv-footer-brand-section strong {
+  display: block;
+  font-size: 19px;
+}
+
+.cv-footer-brand-section p {
+  margin: 4px 0 0;
+  font-size: 12px;
+}
+
+/* FOOTER LINKS */
+
+.cv-footer-links {
+  width: min(1120px, 100%);
+  display: grid;
+  justify-items: center;
+  gap: 24px;
+}
+
+.cv-footer-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 12px;
+}
+
+.cv-footer-link-row span,
+.cv-footer-link-row a {
+  padding: 0 10px;
+  color: #ffffff;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cv-footer-link-row a {
+  text-decoration: none;
+}
+
+.cv-footer-link-row a:hover {
+  text-decoration: none;
+}
+
+.cv-footer-link-row > span,
+.cv-footer-link-row > a {
+  border-right: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.cv-footer-link-row > :last-child {
+  border-right: 0;
+}
+
+/* FOOTER TEXT */
+
+.cv-footer-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 12px;
+
+  max-width: 1120px;
+  color: #ffffff;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.cv-footer-copy p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cv-footer-notice {
+  font-size: 14px;
+}
+
+.cv-copyright {
+  margin-top: 4px !important;
+}
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+.cv-dark {
+  --cv-ink: #e4edf7;
+  --cv-muted: #afbed0;
+  --cv-border: #3a4d63;
+  --cv-surface: #1d2b3b;
+  --cv-background: #132031;
+  --cv-primary: #173a5d;
+  --cv-accent: #66c3b4;
+}
+
+.cv-dark .cv-header,
+.cv-dark .cv-card,
+.cv-dark .cv-details-table,
+.cv-dark .cv-details-row dd,
+.cv-dark .cv-state,
+.cv-dark .cv-status {
+  background: #1d2b3b;
+}
+
+.cv-dark .cv-brand-copy strong,
+.cv-dark .cv-card-heading h1,
+.cv-dark .cv-details-row dt,
+.cv-dark .cv-details-row dd,
+.cv-dark .cv-error-state strong {
+  color: #e4edf7;
+}
+
+.cv-dark .cv-main::before {
+  background-color: #132031;
+}
+
+.cv-dark .cv-details-row,
+.cv-dark .cv-details-row dt {
+  border-color: #3a4d63;
+}
+
+.cv-dark .cv-independence-notice {
+  color: #d2dce7;
+  background: #25364a;
+}
+
+.cv-dark .cv-font-controls button,
+.cv-dark .cv-theme-toggle {
+  color: #e4edf7;
+  background: #25364a;
+  border-color: #3a4d63;
+}
+
+.cv-dark .cv-login-menu {
+  background: #1d2b3b;
+  color: #e4edf7;
+}
+
+.cv-dark .cv-login-option svg {
+  color: #afbed0;
+}
+
+.cv-dark .cv-login-option:hover {
+  background: #25364a;
+  color: #e4edf7;
+}
+
+.cv-dark .cv-status-revoked,
+.cv-dark .cv-status-not_found,
+.cv-dark .cv-status-error {
+  border-color: #754744;
+  color: #ffaaa4;
+  background: #382a2d;
+}
+
+/* =========================================
+   TABLET RESPONSIVENESS
+========================================= */
+
+@media (max-width: 900px) {
+  .cv-header-inner {
+    padding: 0 15px;
+    gap: 12px;
+  }
+
+  .cv-brand-copy strong {
+    font-size: 19px;
+  }
+
+  .cv-nav-inner {
+    gap: 0;
+  }
+
+  .cv-nav-link,
+  .cv-nav-label {
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .cv-main {
+    width: min(640px, calc(100% - 30px));
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+========================================= */
+
+@media (max-width: 600px) {
+  .certificate-verification {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .cv-header {
+    --cv-mobile-header-height: clamp(46px, 12.73vw, 56px);
+    height: var(--cv-mobile-header-height);
+    min-height: var(--cv-mobile-header-height);
+    overflow: visible;
+  }
+
+  .cv-main::before {
+    width: 100vw;
+  }
+
+  .cv-header-inner {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .cv-header-emblem {
+    height: 100%;
+  }
+
+  .cv-reference-logos {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .cv-crs-logo-mobile {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    transform: translateY(-50%);
+  }
+
+  .cv-azadi-logo {
+    position: absolute;
+    top: 50%;
+    left: 58px;
+    width: 52px;
+    height: auto;
+    margin: 0;
+    transform: translateY(-50%);
+  }
+
+  .cv-header-actions {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    z-index: 2;
+    width: auto;
+    gap: 4px;
+    align-items: center;
+    transform: translateY(-50%);
+  }
+
+  .cv-font-controls {
+    display: none;
+  }
+
+  .cv-font-controls {
+    gap: 0;
+  }
+
+  .cv-font-controls button {
+    margin-right: 4px;
+  }
+
+  .cv-theme-toggle {
+    min-width: 28px;
+    width: 28px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    font-size: 24px;
+  }
+
+  .cv-theme-toggle svg {
+    line-height: 1 !important;
+  }
+
+  .cv-admin-link {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    min-height: 30px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .cv-admin-link-label,
+  .cv-admin-link-chevron {
+    display: none !important;
+  }
+
+  .cv-admin-link-icon {
+    display: inline-block !important;
+    width: 24px;
+    height: 24px;
+    line-height: .95 !important;
+    vertical-align: middle;
+  }
+
+  .cv-mobile-menu-toggle {
+    width: 24px;
+    min-width: 24px;
+    height: 30px;
+    padding: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    color: #172638;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .cv-mobile-menu-toggle svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cv-nav {
+    display: none;
+    height: auto;
+  }
+
+  .cv-nav.cv-nav--mobile-open {
+    position: absolute;
+    z-index: 20;
+    top: 40px;
+    right: 4px;
+    width: min(230px, calc(100vw - 24px));
+    max-height: min(244px, calc(100vh - 56px));
+    overflow-y: auto;
+    display: block;
+    color: #222;
+    background: #fff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .28);
+  }
+
+  .cv-nav.cv-nav--mobile-open .cv-nav-inner {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start !important;
+    gap: 0;
+    padding: 8px 0;
+    white-space: normal;
+  }
+
+  .cv-nav.cv-nav--mobile-open .cv-nav-link,
+  .cv-nav.cv-nav--mobile-open .cv-nav-label {
+    width: 100%;
+    height: auto;
+    min-height: 38px;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 0 12px;
+    border-bottom: 0;
+    color: #222;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .cv-nav.cv-nav--mobile-open .cv-nav-label {
+    justify-content: space-between;
+  }
+
+  .cv-nav.cv-nav--mobile-open .cv-nav-label > svg {
+    flex: 0 0 auto;
+    transform: rotate(-90deg);
+  }
+
+  .cv-nav.cv-nav--mobile-open .cv-nav-dropdown {
+    width: 100%;
+  }
+
+  .cv-nav.cv-nav--mobile-open .cv-nav-menu {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .cv-nav.cv-nav--mobile-open .cv-nav-inner > :nth-child(8) { order: 6; }
+  .cv-nav.cv-nav--mobile-open .cv-nav-inner > :nth-child(6) { order: 7; }
+  .cv-nav.cv-nav--mobile-open .cv-nav-inner > :nth-child(7) { order: 8; }
+
+  .cv-independence-notice {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+  .cv-nav-inner {
+    width: 100%;
+    min-width: 0;
+    height: 58px;
+    min-height: 58px;
+    overflow-x: auto;
+    justify-content: flex-start !important;
+  }
+
+  .cv-nav-link,
+  .cv-nav-label {
+    padding: 0 11px;
+    font-size: 11px;
+  }
+
+  .cv-nav-menu { min-width: 300px; }
+
+  .cv-main {
+    width: calc(100% - 22px);
+    padding: 30px 0 35px;
+  }
+
+  .cv-card {
+    padding: 20px 12px 25px;
+  }
+
+  .cv-card-heading h1 {
+    font-size: 18px;
+  }
+
+  .cv-details-row {
+    grid-template-columns: minmax(105px, 38%) minmax(0, 1fr);
+    font-size: calc(13px * var(--cv-font-scale, 1));
+  }
+
+  .cv-details-row dt,
+  .cv-details-row dd {
+    padding: 9px 7px;
+  }
+
+  .cv-footer {
+    min-height: auto;
+    padding: 27px 12px;
+    gap: 18px;
+    font-size: 11px;
+  }
+
+  .cv-footer-links {
+    gap: 10px 14px;
+  }
+
+  .cv-footer-brand-section strong {
+    font-size: 16px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+  .cv-header-inner {
+    justify-content: space-between;
+  }
+
+  .cv-header-actions {
+    width: auto;
+    justify-content: flex-end;
+  }
+
+  .cv-details-row {
+    grid-template-columns: 36% 64%;
+    font-size: 12px;
+  }
+
+  .cv-nav-link,
+  .cv-nav-label {
+    padding: 0 8px;
+    font-size: 10px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.cv-font-controls button:focus-visible,
+.cv-theme-toggle:focus-visible,
+.cv-admin-link:focus-visible,
+.cv-nav-link:focus-visible,
+.cv-nav-dropdown > summary:focus-visible,
+.cv-footer-links a:focus-visible {
+  outline: 3px solid #70c9bb;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-logo-loader__ring,
+  .cv-dots-loader,
+  .cv-dots-loader span {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* User-provided logos are displayed as reference marks, not service branding. */
+.cv-reference-logos {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(14px, 2.5vw, 36px);
+}
+
+.cv-crs-logo {
+  display: block;
+  width: 320px;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  object-fit: contain;
+  object-position: center;
+}
+
+.cv-crs-logo-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .cv-crs-logo-desktop {
+    display: none;
+  }
+
+  .cv-crs-logo-mobile {
+    display: inline;
+    width: 55px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    flex: 0 0 55px;
+  }
+}
+
+.cv-azadi-logo {
+  display: block;
+  width: 80px;
+  height: auto;
+  margin-left: 1.5rem;
+  position: relative;
+  z-index: 1;
+  object-fit: contain;
+  object-position: center;
+}
+
+.cv-footer-logos {
+  width: min(1360px, 100%);
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 20px;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+.cv-footer-logos li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.cv-footer-logos img {
+  display: block;
+  width: 165px;
+  height: 50px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.cv-data-gov-sprite {
+  display: block;
+  width: 165px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: 0% 123.7%;
+  background-size: 985% auto;
+}
+
+.cv-india-gov-sprite {
+  display: block;
+  width: 165px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: 38.52% -64.5%;
+  background-size: 745% auto;
+}
+
+.cv-pm-india-sprite {
+  display: block;
+  width: 150px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: 99.7% 132%;
+  background-size: 1000% auto;
+}
+
+.cv-digital-india-sprite {
+  display: block;
+  width: 165px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: 15.66% 0%;
+  background-size: 700% auto;
+}
+
+.cv-mygov-sprite {
+  display: block;
+  width: 165px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: 87.9% 0%;
+  background-size: 700% auto;
+}
+
+.cv-iyc-sprite {
+  display: block;
+  width: 165px;
+  height: 50px;
+  cursor: pointer;
+  background-color: #ffffff;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 900px) {
+  .cv-reference-logos { gap: 12px; }
+}
+
+@media screen and (max-width: 800px) {
+  .cv-azadi-logo {
+    width: 65px;
+    margin-left: .6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .cv-header-actions {
+    width: auto;
+    justify-content: flex-end;
+  }
+
+  .cv-footer-logos { margin-bottom: 0; }
+  .cv-footer-logos li { margin-right: 0; }
+
+  .cv-footer {
+    min-height: 0;
+    gap: 24px;
+    padding: 36px 10px 24px;
+    font-size: 12px;
+  }
+
+  .cv-footer-link-row span,
+  .cv-footer-link-row a {
+    margin: 0;
+    padding: 0 6px;
+    font-size: 12px;
+  }
+
+  .cv-footer-links { gap: 18px; }
+  .cv-footer-notice { font-size: 12px; }
+}
+
+@media (max-width: 600px) {
+  .cv-nav.cv-nav--mobile-open .cv-nav-inner:not(:empty) {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .cv-nav.cv-nav--mobile-open .cv-nav-inner {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .cv-header-actions { gap: 3px; }
+}
+
+@media screen and (max-width: 600px) {
+  .cv-header-flag-left,
+  .cv-header-flag-right {
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .cv-header-flag-left {
+    left: 0;
+    justify-content: flex-start;
+  }
+
+  .cv-header-flag-right {
+    right: 0;
+    justify-content: flex-end;
+  }
+
+  .cv-header-flag {
+    position: static;
+    width: auto;
+    height: var(--cv-mobile-header-height);
+    max-width: none;
+    flex: 0 0 auto;
+    object-fit: cover;
+  }
+
+  .cv-header-flag-left .cv-header-flag {
+    transform: scaleX(-1);
+  }
+
+  .cv-header-flag-right .cv-header-flag {
+    transform: none;
+  }
+
+  .cv-reference-logos {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cv-reference-logos .cv-crs-logo-mobile {
+    display: block;
+    flex: none;
+  }
+
+  .cv-reference-logos .cv-azadi-logo {
+    display: block;
+  }
+
+  .cv-footer-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5px 14px;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto 8px;
+    padding: 0;
+  }
+
+  .cv-footer-logos li {
+    display: flex;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .cv-footer-logos img,
+  .cv-data-gov-sprite,
+  .cv-india-gov-sprite,
+  .cv-digital-india-sprite,
+  .cv-mygov-sprite,
+  .cv-iyc-sprite {
+    width: 128px;
+    height: 39px;
+  }
+
+  .cv-pm-india-sprite {
+    width: 117px;
+    height: 39px;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 900px) {
+  .cv-header,
+  .cv-header-inner {
+    height: 88px;
+    min-height: 88px;
+  }
+
+  .cv-header-inner {
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  .cv-header-flag-left,
+  .cv-header-flag-right {
+    height: 100%;
+    align-items: center;
+  }
+
+  .cv-header-flag {
+    width: auto;
+    height: 64px;
+    flex: 0 0 auto;
+    object-fit: cover;
+  }
+
+  .cv-header-emblem {
+    height: 80px;
+  }
+
+  .cv-header-emblem img {
+    width: 48px;
+  }
+
+  .cv-reference-logos {
+    gap: 12px;
+  }
+
+  .cv-crs-logo-desktop {
+    display: none;
+  }
+
+  .cv-crs-logo-mobile {
+    display: block;
+    width: 60px;
+    height: 60px;
+    flex: 0 0 60px;
+  }
+
+  .cv-azadi-logo {
+    width: 76px;
+    margin-left: 0;
+  }
+
+  .cv-nav,
+  .cv-nav-inner {
+    height: 64px;
+    min-height: 64px;
+  }
+
+  .cv-nav-inner {
+    justify-content: flex-start !important;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .cv-nav-link,
+  .cv-nav-label {
+    min-height: 64px;
+    padding: 0 7px;
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   MOBILE FLAG BACKGROUND FIX
+========================================= */
+
+@media screen and (max-width: 600px) {
+
+    .cv-header-flag-layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .cv-header-flag-left,
+    .cv-header-flag-right {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        display: block;
+    }
+
+    .cv-header-flag-left {
+        left: 0;
+    }
+
+    .cv-header-flag-right {
+        right: 0;
+    }
+
+    .cv-header-flag {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        object-fit: fill;
+    }
+
+    .cv-header-flag-left .cv-header-flag {
+        left: 0;
+        transform: scaleX(-1);
+    }
+
+    .cv-header-flag-right .cv-header-flag {
+        right: 0;
+        transform: none;
+    }
+
+}
+
+/* Fix Azadi logo position in mobile header */
+@media screen and (max-width: 600px) {
+
+    .cv-azadi-logo {
+        position: absolute !important;
+        top: 50% !important;
+        left: 58px !important;
+        width: 52px !important;
+        height: auto;
+        margin: 0 !important;
+        transform: translateY(-50%) !important;
+        z-index: 2;
+        object-fit: contain;
+    }
+
+}
+
+/* =========================================
+   FINAL MOBILE LAYOUT ADJUSTMENTS
+   Match reference screenshot
+========================================= */
+
+@media screen and (max-width: 600px) {
+
+    /* Header height */
+    .cv-header {
+        height: 48px;
+        min-height: 48px;
+        --cv-mobile-header-height: 48px;
+    }
+
+    .cv-header-inner {
+        height: 100%;
+    }
+
+    /* Space between header and certificate */
+    .cv-main {
+        padding: 40px 0 35px;
+    }
+
+    /* Certificate card spacing */
+    .cv-card {
+        padding: 20px 20px 25px;
+        border-radius: 5px;
+    }
+
+    /* Certificate table columns */
+    .cv-details-row {
+        grid-template-columns: 27% 73%;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    /* Table cell spacing */
+    .cv-details-row dt,
+    .cv-details-row dd {
+        padding: 9px 8px;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    /* Footer spacing */
+    .cv-footer {
+        padding: 27px 12px 24px;
+    }
+
+}
+
+/* Smaller mobile screens */
+@media screen and (max-width: 380px) {
+
+    .cv-card {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .cv-details-row {
+        grid-template-columns: 27% 73%;
+        font-size: 12px;
+    }
+
+}
+
+/* =========================================
+   MOBILE FINAL DESIGN REFINEMENT
+========================================= */
+
+@media screen and (max-width: 600px) {
+
+    /* Main content width */
+    .cv-main {
+        width: calc(100% - 32px);
+        padding-top: 45px;
+        padding-bottom: 35px;
+    }
+
+    /* Certificate card */
+    .cv-card {
+        width: 100%;
+        padding: 20px 16px 25px;
+        border-radius: 5px;
+    }
+
+    /* Certificate table */
+    .cv-details-row {
+        display: grid;
+        grid-template-columns: 28% minmax(0, 1fr);
+        min-height: 44px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    /* Table cells */
+    .cv-details-row dt,
+    .cv-details-row dd {
+        padding: 10px 8px;
+        font-size: inherit;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    /* Footer */
+    .cv-footer {
+        padding: 27px 12px 24px;
+    }
+}
+
+/* Small mobile screens */
+@media screen and (max-width: 380px) {
+
+    .cv-main {
+        width: calc(100% - 24px);
+    }
+
+    .cv-card {
+        padding: 18px 12px 24px;
+    }
+
+    .cv-details-row {
+        grid-template-columns: 30% minmax(0, 1fr);
+        font-size: 13px;
+    }
+
+}
+
+/* =========================================
+   CRS MOBILE PAGE - FINAL REFINEMENT
+   Reference viewport: 440 x 956
+========================================= */
+
+@media screen and (max-width: 600px) {
+
+    /* Full page */
+    html,
+    body,
+    #root {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+    }
+
+    .certificate-verification {
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100svh;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    /* HEADER */
+    .cv-header {
+        width: 100%;
+        height: 48px;
+        min-height: 48px;
+        --cv-mobile-header-height: 48px;
+    }
+
+    .cv-header-inner {
+        width: 100%;
+        height: 100%;
+        padding: 0 5px;
+    }
+
+    /* MAIN CONTENT */
+    .cv-main {
+        width: calc(100% - 20px);
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 36px 0 35px;
+        flex: 0 0 auto;
+    }
+
+    /* CERTIFICATE CARD */
+    .cv-card {
+        width: 100%;
+        padding: 20px 18px 25px;
+        border-radius: 5px;
+        background: #ffffff;
+        box-shadow:
+            0 3px 15px rgba(0, 0, 0, 0.18),
+            0 0 5px rgba(0, 0, 0, 0.08);
+    }
+
+    /* TABLE */
+    .cv-details-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .cv-details-row {
+        display: grid;
+        grid-template-columns: 27% minmax(0, 1fr);
+        min-height: 44px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .cv-details-row dt,
+    .cv-details-row dd {
+        min-width: 0;
+        padding: 9px 8px;
+        font-size: inherit;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    .cv-details-row dt {
+        border-right: 1px solid #d9dee5;
+    }
+
+    /* WATERMARK */
+    .cv-watermark-pattern {
+        width: 100vw;
+        overflow: hidden;
+    }
+
+    /* FOOTER */
+    .cv-footer {
+        width: 100%;
+        min-height: auto;
+        margin-top: auto;
+        padding: 36px 8px 24px;
+        gap: 18px;
+        font-size: 12px;
+        overflow: hidden;
+    }
+
+    /* FOOTER LOGOS */
+    .cv-footer-logos {
+        width: 100%;
+        max-width: 360px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 6px 15px;
+        margin: 0 auto 8px;
+        padding: 0;
+    }
+
+    .cv-footer-logos li {
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .cv-footer-logos img,
+    .cv-data-gov-sprite,
+    .cv-india-gov-sprite,
+    .cv-digital-india-sprite,
+    .cv-mygov-sprite,
+    .cv-iyc-sprite {
+        width: 128px;
+        height: 39px;
+    }
+
+    .cv-footer-logos img {
+        max-width: none;
+        object-fit: fill;
+    }
+
+    .cv-pm-india-sprite {
+        width: 117px;
+        height: 39px;
+    }
+
+    /* FOOTER LINKS */
+    .cv-footer-links {
+        width: 100%;
+        gap: 18px;
+    }
+
+    .cv-footer-link-row {
+        justify-content: center;
+        flex-wrap: wrap;
+        row-gap: 4px;
+    }
+
+    .cv-footer-link-row span,
+    .cv-footer-link-row a {
+        margin: 0;
+        padding: 0 5px;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    .cv-footer-copy {
+        gap: 12px;
+        font-size: 12px;
+    }
+
+}
+
+/* EXTRA SMALL MOBILE */
+@media screen and (max-width: 380px) {
+
+    .cv-main {
+        width: calc(100% - 20px);
+    }
+
+    .cv-card {
+        padding: 16px 12px 22px;
+    }
+
+    .cv-details-row {
+        grid-template-columns: 29% minmax(0, 1fr);
+        font-size: 12px;
+    }
+
+}
+
+/* Single responsive flag background */
+
+.cv-header {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.cv-header-flag-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cv-header-flag-layer::before,
+.cv-header-flag-layer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: min(44%, calc(50% - 26px));
+  height: 100%;
+  background-image: var(--cv-flag-image);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.cv-header-flag-layer::before {
+  left: 0;
+  transform: scaleX(-1);
+}
+
+.cv-header-flag-layer::after {
+  right: 0;
+}
+
+.cv-header-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.cv-header-emblem {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* Remove unwanted outer page spacing */
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.certificate-verification {
+  width: 100%;
+  margin: 0 !important;
+  padding: 0;
+}
+
+.cv-header,
+.cv-nav {
+  margin-top: 0 !important;
+}
+
+/* =========================================
+   INTERMEDIATE SCREEN RESPONSIVENESS
+   601px - 1100px
+========================================= */
+
+@media screen and (min-width: 601px) and (max-width: 1100px) {
+
+  /* HEADER */
+  .cv-header {
+    width: 100%;
+    height: 72px;
+    min-height: 72px;
+    margin: 0;
+  }
+
+  .cv-header-inner {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 0 10px;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Header logos */
+  .cv-reference-logos {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .cv-crs-logo-desktop {
+    width: clamp(180px, 27vw, 260px);
+    height: auto;
+  }
+
+  .cv-azadi-logo {
+    width: 58px;
+    margin-left: 0;
+  }
+
+  /* Header controls */
+  .cv-header-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .cv-font-controls button {
+    width: 28px;
+    min-width: 28px;
+    height: 30px;
+    margin-right: 3px;
+    font-size: 12px;
+  }
+
+  .cv-theme-toggle {
+    width: 29px;
+    min-width: 29px;
+    height: 30px;
+    font-size: 20px;
+  }
+
+  .cv-admin-link {
+    height: 32px;
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  /* NAVIGATION */
+  .cv-nav {
+    width: 100%;
+    height: 54px;
+    min-height: 54px;
+    margin: 0 !important;
+    overflow: hidden;
+  }
+
+  .cv-nav-inner {
+    width: 100%;
+    height: 54px;
+    min-height: 54px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start !important;
+
+    gap: 0;
+    padding: 0 8px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cv-nav-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cv-nav-link,
+  .cv-nav-label {
+    display: inline-flex;
+    flex: 0 0 auto;
+
+    height: 54px;
+    min-height: 54px;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 13px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .cv-nav-dropdown {
+    flex: 0 0 auto;
+  }
+
+  /* MAIN CONTENT */
+  .cv-main {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* =========================================
+   FINAL HEADER AND NAVIGATION FIX
+========================================= */
+
+/* Remove browser and root spacing */
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Make verification page full screen */
+.certificate-verification {
+  position: relative;
+  width: 100vw !important;
+  max-width: none !important;
+  margin: 0 0 0 calc(50% - 50vw) !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+
+/* Header and navbar must occupy complete width */
+.cv-header,
+.cv-nav {
+  width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  border-radius: 0;
+}
+
+/* =========================================
+   TABLET AND SMALL LAPTOP
+   601px - 1100px
+========================================= */
+
+@media screen and (min-width: 601px) and (max-width: 1100px) {
+
+  .cv-header {
+    height: 60px;
+    min-height: 60px;
+  }
+
+  .cv-header-inner {
+    height: 100%;
+    min-height: 0;
+    padding: 0 8px !important;
+    gap: 5px !important;
+  }
+
+  /* Reduce CRS logo */
+  .cv-reference-logos {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 5px !important;
+  }
+
+  .cv-crs-logo-desktop {
+    display: block !important;
+    width: clamp(145px, 23vw, 220px) !important;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .cv-crs-logo-mobile {
+    display: none !important;
+  }
+
+  /* Reduce Azadi logo */
+  .cv-azadi-logo {
+    width: clamp(38px, 5.5vw, 52px) !important;
+    height: auto;
+    margin: 0 !important;
+  }
+
+  /* Reduce header action buttons */
+  .cv-header-actions {
+    flex: 0 0 auto;
+    gap: 4px !important;
+  }
+
+  .cv-font-controls button,
+  .cv-theme-toggle {
+    min-width: 29px !important;
+    width: 29px !important;
+    height: 31px !important;
+    padding: 3px !important;
+    font-size: 13px !important;
+  }
+
+  .cv-admin-link {
+    min-height: 32px;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .cv-header-emblem img {
+    width: 32px !important;
+  }
+
+  /* NAVIGATION */
+  .cv-nav {
+    height: 46px;
+    min-height: 46px;
+    overflow: hidden;
+  }
+
+  .cv-nav-inner {
+    width: 100%;
+    height: 46px;
+    min-height: 46px;
+    padding: 0 5px !important;
+    gap: 0 !important;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: space-evenly !important;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cv-nav-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cv-nav-link,
+  .cv-nav-label {
+    flex: 0 0 auto;
+    height: 46px;
+    min-height: 46px;
+    padding: 0 clamp(5px, 1.1vw, 12px) !important;
+    font-size: clamp(10px, 1.25vw, 12px) !important;
+    white-space: nowrap;
+  }
+
+  .cv-nav-dropdown {
+    flex: 0 0 auto;
+  }
+}
+
+/* =========================================
+   MOBILE
+   0px - 600px
+========================================= */
+
+@media screen and (max-width: 600px) {
+
+  .cv-header {
+    height: 46px;
+    min-height: 46px;
+  }
+
+  .cv-header-inner {
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: 0 5px !important;
+  }
+
+  /* Smaller mobile CRS logo */
+  .cv-crs-logo-mobile {
+    display: block !important;
+    width: 31px !important;
+    height: 31px !important;
+    object-fit: contain;
+  }
+
+  .cv-crs-logo-desktop {
+    display: none !important;
+  }
+
+  .cv-azadi-logo {
+    width: 40px !important;
+    height: auto;
+  }
+
+  .cv-header-emblem img {
+    width: 25px !important;
+  }
+
+  .cv-header-actions {
+    gap: 3px !important;
+  }
+}
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media screen and (max-width: 380px) {
+
+  .cv-crs-logo-mobile {
+    width: 27px !important;
+    height: 27px !important;
+  }
+
+  .cv-azadi-logo {
+    width: 34px !important;
+  }
+
+  .cv-header-emblem img {
+    width: 22px !important;
+  }
+
+  .cv-header-actions {
+    gap: 2px !important;
+  }
+}
+
+
+
+/* =========================================================
+   FINAL HEADER SYSTEM
+   Independent logo classes + responsive header/navigation
+   Keep this block at the END of this stylesheet.
+========================================================= */
+
+/* Full-width page shell without forcing a 100vw overflow */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.certificate-verification {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow-x: clip;
+}
+
+/* Header and SVG flag */
+.certificate-verification .cv-header {
+  position: relative;
+  isolation: isolate;
+  z-index: 25;
+  width: 100%;
+  height: 64px;
+  min-height: 64px;
+  margin: 0;
+  overflow: visible;
+  background: #fff;
+}
+
+.certificate-verification .cv-header-flag-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.certificate-verification .cv-header-flag-layer::before,
+.certificate-verification .cv-header-flag-layer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: min(44%, calc(50% - 26px));
+  height: 100%;
+  background-image: var(--cv-flag-image);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.certificate-verification .cv-header-flag-layer::before {
+  left: 0;
+  transform: scaleX(-1);
+}
+
+.certificate-verification .cv-header-flag-layer::after {
+  right: 0;
+}
+
+/* Header content layer */
+.certificate-verification .cv-header-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0 12px;
+  gap: 12px;
+}
+
+/* Independent logo group */
+.certificate-verification .cv-header-brand-logos {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  gap: clamp(10px, 1.5vw, 22px);
+}
+
+/* Desktop CRS wordmark */
+.certificate-verification .cv-logo-crs-desktop {
+  display: block;
+  flex: 0 1 auto;
+  width: clamp(200px, 20vw, 330px);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Compact CRS emblem used on mobile/tablet */
+.certificate-verification .cv-logo-crs-mobile {
+  display: none;
+  flex: 0 0 auto;
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Azadi logo */
+.certificate-verification .cv-logo-azadi {
+  display: block;
+  flex: 0 0 auto;
+  width: clamp(48px, 5.2vw, 68px);
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  object-fit: contain;
+}
+
+/* Centre national emblem */
+.certificate-verification .cv-header-emblem {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.certificate-verification .cv-logo-emblem {
+  display: block;
+  width: 34px;
+  max-height: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Header action group */
+.certificate-verification .cv-header-actions {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Navigation */
+.certificate-verification .cv-nav {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  background-color: #234a7d !important;
+}
+
+.certificate-verification .cv-nav-inner {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  gap: 2px;
+  padding: 0 10px;
+  overflow: visible;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.certificate-verification .cv-nav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.certificate-verification .cv-nav-link,
+.certificate-verification .cv-nav-label {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+/* Medium desktop / small laptop: 801–1100px */
+@media screen and (min-width: 801px) and (max-width: 1100px) {
+  .certificate-verification .cv-header,
+  .certificate-verification .cv-header-inner {
+    height: 60px;
+    min-height: 60px;
+  }
+
+  .certificate-verification .cv-header-inner {
+    padding: 0 8px;
+    gap: 6px;
+  }
+
+  .certificate-verification .cv-header-brand-logos {
+    gap: 8px;
+  }
+
+  .certificate-verification .cv-logo-crs-desktop {
+    width: clamp(160px, 20vw, 210px);
+  }
+
+  .certificate-verification .cv-logo-azadi {
+    width: clamp(38px, 5vw, 52px);
+  }
+
+  .certificate-verification .cv-logo-emblem {
+    width: 30px;
+  }
+
+  .certificate-verification .cv-header-actions {
+    gap: 4px;
+  }
+
+  .certificate-verification .cv-font-controls button {
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    margin-right: 2px;
+    font-size: 12px;
+  }
+
+  .certificate-verification .cv-theme-toggle {
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    font-size: 19px;
+  }
+
+  .certificate-verification .cv-admin-link {
+    height: 34px;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .certificate-verification .cv-nav,
+  .certificate-verification .cv-nav-inner {
+    height: 46px;
+    min-height: 46px;
+  }
+
+  .certificate-verification .cv-nav-inner {
+    justify-content: flex-start;
+    gap: 0;
+    padding: 0 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .certificate-verification .cv-nav-link,
+  .certificate-verification .cv-nav-label {
+    height: 46px;
+    min-height: 46px;
+    padding: 0 clamp(6px, 0.9vw, 10px);
+    font-size: clamp(10px, 1.15vw, 12px);
+  }
+}
+
+/* Tablet: 601–800px. Use compact CRS logo. */
+@media screen and (min-width: 601px) and (max-width: 800px) {
+  .certificate-verification .cv-header,
+  .certificate-verification .cv-header-inner {
+    height: 60px;
+    min-height: 60px;
+  }
+
+  .certificate-verification .cv-header-inner {
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .certificate-verification .cv-header-brand-logos {
+    flex: 1 1 auto;
+    gap: 10px;
+  }
+
+  .certificate-verification .cv-logo-crs-desktop {
+    display: none;
+  }
+
+  .certificate-verification .cv-logo-crs-mobile {
+    display: block;
+    width: clamp(42px, 6.2vw, 50px);
+  }
+
+  .certificate-verification .cv-logo-azadi {
+    width: clamp(44px, 6.2vw, 52px);
+  }
+
+  .certificate-verification .cv-logo-emblem {
+    width: 29px;
+  }
+
+  .certificate-verification .cv-header-actions {
+    gap: 5px;
+  }
+
+  .certificate-verification .cv-font-controls button,
+  .certificate-verification .cv-theme-toggle {
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .certificate-verification .cv-admin-link {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    min-height: 30px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .certificate-verification .cv-admin-link-label,
+  .certificate-verification .cv-admin-link-chevron {
+    display: none;
+  }
+
+  .certificate-verification .cv-admin-link-icon {
+    display: inline-block !important;
+  }
+
+  /* On tablets keep nav usable with horizontal scrolling. */
+  .certificate-verification .cv-nav,
+  .certificate-verification .cv-nav-inner {
+    height: 46px;
+    min-height: 46px;
+  }
+
+  .certificate-verification .cv-nav-inner {
+    justify-content: flex-start;
+    gap: 0;
+    padding: 0 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .certificate-verification .cv-nav-link,
+  .certificate-verification .cv-nav-label {
+    height: 46px;
+    min-height: 46px;
+    padding: 0 9px;
+    font-size: 12px;
+  }
+}
+
+/* Mobile: use the compact CRS logo and hamburger navigation. */
+@media screen and (max-width: 600px) {
+  .certificate-verification .cv-header,
+  .certificate-verification .cv-header-inner {
+    height: 46px;
+    min-height: 46px;
+  }
+
+  .certificate-verification .cv-header {
+    overflow: visible;
+  }
+
+  .certificate-verification .cv-header-inner {
+    position: absolute;
+    inset: 0;
+    display: block;
+    padding: 0;
+  }
+
+  .certificate-verification .cv-header-brand-logos {
+    position: absolute;
+    top: 50%;
+    left: 7px;
+    display: flex;
+    width: auto;
+    max-width: calc(50% - 35px);
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .certificate-verification .cv-logo-crs-desktop {
+    display: none;
+  }
+
+  .certificate-verification .cv-logo-crs-mobile {
+    display: block;
+    width: clamp(40px, 12.5vw, 48px);
+    height: auto;
+  }
+
+  .certificate-verification .cv-logo-azadi {
+    display: block;
+    width: clamp(36px, 11vw, 44px);
+    height: auto;
+    margin: 0;
+  }
+
+  .certificate-verification .cv-header-emblem {
+    height: 100%;
+  }
+
+  .certificate-verification .cv-logo-emblem {
+    width: clamp(20px, 6vw, 25px);
+  }
+
+  .certificate-verification .cv-header-actions {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    display: flex;
+    width: auto;
+    gap: 3px;
+    align-items: center;
+    transform: translateY(-50%);
+  }
+
+  .certificate-verification .cv-font-controls {
+    display: none;
+  }
+
+  .certificate-verification .cv-theme-toggle {
+    display: inline-flex;
+    width: 27px;
+    min-width: 27px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    font-size: 22px;
+  }
+
+  .certificate-verification .cv-login-dropdown {
+    display: block;
+  }
+
+  .certificate-verification .cv-admin-link {
+    display: inline-flex;
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    min-height: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .certificate-verification .cv-admin-link-label,
+  .certificate-verification .cv-admin-link-chevron {
+    display: none !important;
+  }
+
+  .certificate-verification .cv-admin-link-icon {
+    display: inline-block !important;
+    width: 22px;
+    height: 22px;
+  }
+
+  .certificate-verification .cv-mobile-menu-toggle {
+    display: inline-flex;
+    width: 25px;
+    min-width: 25px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 1px;
+    border: 0;
+    border-radius: 0;
+    color: #172638;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .certificate-verification .cv-mobile-menu-toggle svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .certificate-verification .cv-nav {
+    display: none;
+  }
+
+  .certificate-verification .cv-nav.cv-nav--mobile-open {
+    position: absolute;
+    top: 44px;
+    right: 5px;
+    z-index: 20;
+    display: block;
+    width: min(250px, calc(100vw - 20px));
+    max-height: min(70vh, 440px);
+    overflow: auto;
+    background: #fff !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  .certificate-verification .cv-nav.cv-nav--mobile-open .cv-nav-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    gap: 0;
+    padding: 6px 0;
+    overflow: visible;
+    white-space: normal;
+  }
+
+  .certificate-verification .cv-nav.cv-nav--mobile-open .cv-nav-link,
+  .certificate-verification .cv-nav.cv-nav--mobile-open .cv-nav-label {
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: 40px;
+    justify-content: flex-start;
+    padding: 9px 13px;
+    border: 0;
+    color: #222;
+    font-size: 13px;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .certificate-verification .cv-nav.cv-nav--mobile-open .cv-nav-dropdown {
+    width: 100%;
+  }
+
+  .certificate-verification .cv-nav.cv-nav--mobile-open .cv-nav-menu {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* Extra-small phones */
+@media screen and (max-width: 380px) {
+  .certificate-verification .cv-header-brand-logos {
+    left: 5px;
+    gap: 3px;
+  }
+
+  .certificate-verification .cv-logo-crs-mobile {
+    width: 40px;
+  }
+
+  .certificate-verification .cv-logo-azadi {
+    width: 34px;
+  }
+
+  .certificate-verification .cv-logo-emblem {
+    width: 19px;
+  }
+
+  .certificate-verification .cv-header-actions {
+    right: 3px;
+    gap: 1px;
+  }
+
+  .certificate-verification .cv-mobile-menu-toggle {
+    width: 22px;
+    min-width: 22px;
+  }
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .certificate-verification > header.cv-header {
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .certificate-verification > nav.cv-nav:not(.cv-nav--mobile-open) {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .certificate-verification > main.cv-main {
+    margin: 0 auto !important;
+    padding: 36px 0 35px !important;
+    position: relative !important;
+    top: 0 !important;
+    transform: none !important;
+  }
+
+  .certificate-verification > main.cv-main > .cv-card {
+    margin-top: 0 !important;
+  }
+}

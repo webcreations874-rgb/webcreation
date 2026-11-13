@@ -3189,3 +3189,468 @@ body,
     margin-top: 0 !important;
   }
 }
+
+/* =========================================
+   PRINT STYLES (MATCHES REFERENCE PDF)
+========================================= */
+
+@page {
+  size: A4 portrait;
+  margin: 10mm 12mm 10mm 12mm;
+}
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .certificate-verification,
+  .certificate-verification.cv-dark {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    min-height: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Header banner with flag SVG across both left and right sides */
+  .certificate-verification .cv-header {
+    position: relative !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    background: #ffffff !important;
+    border-bottom: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    width: 100% !important;
+  }
+
+  .certificate-verification .cv-header-flag-layer {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    background: linear-gradient(180deg, #f59e38 0%, #f59e38 16px, transparent 16px) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .certificate-verification .cv-header-flag-layer::before,
+  .certificate-verification .cv-header-flag-layer::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 68% !important;
+    height: 100% !important;
+    background-image: var(--cv-flag-image, url("../../assets/images/backgrounds/flag.svg")) !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .certificate-verification .cv-header-flag-layer::before {
+    left: 0 !important;
+    transform: scaleX(-1) !important;
+    background-position: left center !important;
+  }
+
+  .certificate-verification .cv-header-flag-layer::after {
+    right: 0 !important;
+    transform: none !important;
+    background-position: right center !important;
+  }
+
+  .certificate-verification .cv-header-emblem {
+    display: flex !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 3px !important;
+    transform: translateX(-50%) !important;
+    z-index: 3 !important;
+    height: calc(100% - 6px) !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+  }
+
+  .certificate-verification .cv-logo-emblem {
+    display: block !important;
+    width: 28px !important;
+    height: auto !important;
+  }
+
+  .certificate-verification .cv-header-inner {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 10px !important;
+    height: 64px !important;
+    position: relative !important;
+    z-index: 2 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .certificate-verification .cv-header-brand-logos {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .certificate-verification .cv-logo-crs-desktop {
+    display: block !important;
+    width: 250px !important;
+    height: auto !important;
+    max-height: 44px !important;
+  }
+
+  .certificate-verification .cv-logo-crs-mobile {
+    display: none !important;
+  }
+
+  .certificate-verification .cv-logo-azadi {
+    display: block !important;
+    width: 52px !important;
+    height: auto !important;
+    max-height: 38px !important;
+  }
+
+  .certificate-verification .cv-header-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    background: transparent !important;
+  }
+
+  .certificate-verification .cv-font-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+  }
+
+  .certificate-verification .cv-font-controls button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 10.5px !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 4px !important;
+    background: #ffffff !important;
+    color: #212529 !important;
+    padding: 0 !important;
+  }
+
+  .certificate-verification .cv-theme-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 15px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #212529 !important;
+    padding: 0 !important;
+  }
+
+  .certificate-verification .cv-theme-toggle .cv-moon-icon {
+    display: inline-block !important;
+    fill: #111827 !important;
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  .certificate-verification .cv-admin-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    padding: 0 10px !important;
+    height: 26px !important;
+    min-height: 26px !important;
+    background: #ffffff !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 4px !important;
+    color: #6c757d !important;
+    box-shadow: none !important;
+    font-size: 12px !important;
+    cursor: default !important;
+  }
+
+  .certificate-verification .cv-admin-link-label {
+    display: inline !important;
+    color: #6c757d !important;
+  }
+
+  .certificate-verification .cv-admin-link-chevron {
+    display: inline-block !important;
+    color: #6c757d !important;
+    font-size: 11px !important;
+  }
+
+  .certificate-verification .cv-admin-link-icon {
+    display: none !important;
+  }
+
+  .certificate-verification .cv-login-menu {
+    display: none !important;
+  }
+
+  .certificate-verification .cv-mobile-menu-toggle {
+    display: none !important;
+  }
+
+  /* Navigation Bar matching reference */
+  .certificate-verification .cv-nav {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 6px 0 16px !important;
+    padding: 0 !important;
+  }
+
+  .certificate-verification .cv-nav-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 4px !important;
+    padding: 0 2px !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .certificate-verification .cv-nav-link,
+  .certificate-verification .cv-nav-label {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: transparent !important;
+    color: #8c979a !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    border: none !important;
+    padding: 2px 3px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    cursor: default !important;
+  }
+
+  .certificate-verification .cv-nav-dropdown {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .certificate-verification .cv-nav-dropdown summary {
+    list-style: none !important;
+    cursor: default !important;
+  }
+
+  .certificate-verification .cv-nav-dropdown summary::-webkit-details-marker,
+  .certificate-verification .cv-nav-dropdown summary::marker {
+    display: none !important;
+  }
+
+  .certificate-verification .cv-nav-label svg {
+    display: inline-block !important;
+    color: #8c979a !important;
+    stroke: #8c979a !important;
+    width: 11px !important;
+    height: 11px !important;
+    margin-left: 2px !important;
+    vertical-align: middle !important;
+  }
+
+  .certificate-verification .cv-nav-menu {
+    display: none !important;
+  }
+
+  /* Main section and Certificate Card on Page 1 (narrow & vertically tall like reference) */
+  .certificate-verification .cv-main {
+    position: relative !important;
+    width: 342px !important;
+    max-width: 90% !important;
+    margin: 0 auto !important;
+    padding: 10px 0 20px !important;
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  .certificate-verification .cv-watermark-pattern {
+    display: none !important;
+  }
+
+  .certificate-verification .cv-loading-overlay {
+    display: none !important;
+  }
+
+  .certificate-verification .cv-card {
+    position: relative !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 24px 25px 38px 25px !important;
+    background: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22) !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    overflow: visible !important;
+  }
+
+  .certificate-verification .cv-details-table {
+    width: 100% !important;
+    border: 1px solid #dee2e6 !important;
+    border-collapse: collapse !important;
+    background: #ffffff !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .certificate-verification .cv-details-row {
+    display: grid !important;
+    grid-template-columns: 95px minmax(0, 1fr) !important;
+    border-bottom: 1px solid #dee2e6 !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+    min-height: 36px !important;
+  }
+
+  .certificate-verification .cv-details-row:last-child {
+    border-bottom: none !important;
+  }
+
+  .certificate-verification .cv-details-row dt {
+    padding: 8px 10px !important;
+    color: #212529 !important;
+    font-weight: 400 !important;
+    border-right: 1px solid #dee2e6 !important;
+    background: #ffffff !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+  }
+
+  .certificate-verification .cv-details-row dd {
+    padding: 8px 10px !important;
+    color: #212529 !important;
+    font-weight: 400 !important;
+    background: #ffffff !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Footer on Page 2 */
+  .certificate-verification .cv-footer {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    break-before: page !important;
+    page-break-before: always !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    border-top: 3px solid #ccc !important;
+    padding: 130px 20px 40px !important;
+    margin-top: 0 !important;
+    gap: 20px !important;
+  }
+
+  .certificate-verification .cv-footer-logos {
+    display: none !important;
+  }
+
+  .certificate-verification .cv-footer-links {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 900px !important;
+  }
+
+  .certificate-verification .cv-footer-link-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 12px 18px !important;
+  }
+
+  .certificate-verification .cv-footer-link-row span,
+  .certificate-verification .cv-footer-link-row a {
+    color: #596579 !important;
+    font-size: 12px !important;
+    padding: 0 !important;
+    border-right: none !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+  }
+
+  .certificate-verification .cv-footer-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+    max-width: 900px !important;
+    color: #596579 !important;
+    font-size: 12px !important;
+    text-align: center !important;
+    margin-top: 8px !important;
+  }
+
+  .certificate-verification .cv-footer-copy p {
+    color: #596579 !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+  }
+
+  .certificate-verification .cv-copyright {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+  }
+
+  .certificate-verification .cv-copyright svg {
+    display: inline-block !important;
+    width: 12px !important;
+    height: 12px !important;
+    stroke: #596579 !important;
+    vertical-align: -1px !important;
+  }
+}
+
+

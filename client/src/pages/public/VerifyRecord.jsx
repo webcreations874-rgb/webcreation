@@ -86,6 +86,11 @@ export default function VerifyRecord() {
   });
 
   useEffect(() => {
+    document.title =
+      "Validate Certificate | Civil Registration System | Government of India";
+  }, []);
+
+  useEffect(() => {
     if (!loginMenuOpen) return undefined;
 
     const handlePointerDown = (event) => {

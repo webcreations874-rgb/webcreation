@@ -4,11 +4,12 @@ import { toast } from "react-toastify";
 import StatusBadge from "../../components/StatusBadge";
 import RecordForm from "../../components/RecordForm";
 import api, { errorMessage, saveFile } from "../../services/api";
+import { formatDateDDMMYYYY } from "../../utils/dateUtils";
 
 const details = [
   ["Registration number", "registrationNumber"], ["Record type", "recordType"], ["Full name", "fullName"],
-  ["Gender", "gender"], ["Date of occurrence", "dateOfOccurrence"], ["Father's name", "fatherName"],
-  ["Mother's name", "motherName"], ["Place of occurrence", "placeOfOccurrence"], ["Institution", "institutionName"],
+  ["Gender", "gender"], ["Date of death", "dateOfOccurrence"], ["Father's name", "fatherName"],
+  ["Mother's name", "motherName"], ["Place of death", "placeOfOccurrence"], ["Institution", "institutionName"],
   ["District", "district"], ["State", "state"], ["Country", "country"], ["Registration date", "registrationDate"],
   ["Registration unit", "registrationUnitName"], ["Unit code", "registrationUnitCode"],
   ["Issuing organization", "issuingOrganization"], ["Remarks", "remarks"],
@@ -18,7 +19,9 @@ const details = [
 function showValue(record, key) {
   const value = record[key];
   if (!value) return "—";
-  return key.toLowerCase().includes("date") ? new Date(value).toLocaleDateString() : value;
+  return (key.toLowerCase().includes("date") || key === "dateOfOccurrence")
+    ? formatDateDDMMYYYY(value)
+    : value;
 }
 
 export default function RecordDetails() {
@@ -88,7 +91,7 @@ export default function RecordDetails() {
   return (
     <>
       <div className="page-heading">
-        <div><h1>{editing ? "Edit record" : "Record details"}</h1><p>{record.registrationNumber} · created {new Date(record.createdAt).toLocaleDateString()}</p></div>
+        <div><h1>{editing ? "Edit record" : "Record details"}</h1><p>{record.registrationNumber} · created {formatDateDDMMYYYY(record.createdAt)}</p></div>
         <div className="d-flex flex-wrap gap-2">
           <Link to="/admin/records" className="btn btn-outline-secondary">Back to records</Link>
           {!editing && <button className="btn btn-outline-secondary" onClick={() => setEditing(true)}>Edit record</button>}
@@ -96,12 +99,12 @@ export default function RecordDetails() {
           {!editing && <button className="btn btn-outline-primary" onClick={() => download("pdf")}>QR PDF</button>}
         </div>
       </div>
-      {editing ? <RecordForm initialValues={{ ...record, dateOfOccurrence: record.dateOfOccurrence.slice(0, 10), registrationDate: record.registrationDate.slice(0, 10) }} onSubmit={update} submitLabel="Save changes" busy={busy} /> : <>
+      {editing ? <RecordForm initialValues={{ ...record, dateOfOccurrence: formatDateDDMMYYYY(record.dateOfOccurrence), registrationDate: formatDateDDMMYYYY(record.registrationDate) }} onSubmit={update} submitLabel="Save changes" busy={busy} /> : <>
         <div className="record-detail-grid">
           <section className="panel">
             <div className="d-flex justify-content-between align-items-center mb-3"><h2 className="panel-title">Registration information</h2><StatusBadge status={record.status} /></div>
             <dl className="detail-list">
-              {details.map(([label, key]) => <div className="detail-row" key={key}><dt>{label}</dt><dd>{showValue(record, key)}</dd></div>)}
+              {details.map(([label, key]) => <div className="detail-row" key={key}><dt>{label}</dt><dd style={{ whiteSpace: "pre-wrap" }}>{showValue(record, key)}</dd></div>)}
               <div className="detail-row"><dt>Verification ID</dt><dd><code>{record.verificationId}</code></dd></div>
               <div className="detail-row"><dt>Verification URL</dt><dd><a href={`/verify/${record.verificationId}`} target="_blank" rel="noreferrer">Open public verification</a></dd></div>
             </dl>

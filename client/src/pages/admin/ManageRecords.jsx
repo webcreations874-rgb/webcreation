@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { FiDownload, FiEye, FiPrinter } from "react-icons/fi";
 import StatusBadge from "../../components/StatusBadge";
 import api, { errorMessage, saveFile } from "../../services/api";
+import { formatDateDDMMYYYY } from "../../utils/dateUtils";
 
 export default function ManageRecords() {
   const [records, setRecords] = useState([]);
@@ -81,7 +82,7 @@ export default function ManageRecords() {
                 <td>{record.registrationNumber}</td>
                 <td className="person-cell"><strong>{record.fullName}</strong></td>
                 <td>{record.recordType}</td>
-                <td>{new Date(record.registrationDate).toLocaleDateString()}</td>
+                <td>{formatDateDDMMYYYY(record.registrationDate)}</td>
                 <td><code>{record.verificationId.slice(0, 9)}…</code></td>
                 <td><StatusBadge status={record.status} /></td>
                 <td><div className="action-group">

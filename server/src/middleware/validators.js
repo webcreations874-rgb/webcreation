@@ -1,7 +1,25 @@
 import { body, param } from "express-validator";
 
-const text = (field, label, max = 160) =>
-  body(field).trim().notEmpty().withMessage(`${label} is required.`).isLength({ max }).withMessage(`${label} is too long.`);
+const text = (field, label) =>
+  body(field).trim().notEmpty().withMessage(`${label} is required.`);
+
+const isValidDate = (value) => {
+  if (!value || typeof value !== "string") return false;
+  const trimmed = value.trim();
+  if (/^\d{4}-\d{2}-\d{2}(T.*)?$/.test(trimmed)) {
+    return !Number.isNaN(Date.parse(trimmed));
+  }
+  const match = trimmed.match(/^(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})$/);
+  if (match) {
+    const day = Number.parseInt(match[1], 10);
+    const month = Number.parseInt(match[2], 10);
+    const year = Number.parseInt(match[3], 10);
+    if (month < 1 || month > 12 || day < 1 || day > 31 || year < 1800 || year > 2200) return false;
+    const d = new Date(Date.UTC(year, month - 1, day));
+    return d.getUTCFullYear() === year && d.getUTCMonth() === month - 1 && d.getUTCDate() === day;
+  }
+  return false;
+};
 
 export const loginValidation = [
   body().custom((value) => {
@@ -13,15 +31,15 @@ export const loginValidation = [
 ];
 
 export const recordValidation = [
-  text("registrationNumber", "Registration number", 80),
-  text("recordType", "Record type", 80),
+  text("registrationNumber", "Registration number"),
+  text("recordType", "Record type"),
   text("fullName", "Full name"),
-  text("gender", "Gender", 40),
-  body("dateOfOccurrence").isISO8601().withMessage("Enter a valid occurrence date."),
-  text("placeOfOccurrence", "Place of occurrence", 240),
-  body("registrationDate").isISO8601().withMessage("Enter a valid registration date."),
+  text("gender", "Gender"),
+  body("dateOfOccurrence").custom(isValidDate).withMessage("Enter a valid date of death (dd/mm/yyyy)."),
+  text("placeOfOccurrence", "Place of death"),
+  body("registrationDate").custom(isValidDate).withMessage("Enter a valid registration date (dd/mm/yyyy)."),
   text("registrationUnitName", "Registration unit name"),
-  text("registrationUnitCode", "Registration unit code", 80),
+  text("registrationUnitCode", "Registration unit code"),
   text("issuingOrganization", "Issuing organization"),
   ...["fatherName", "motherName", "institutionName", "district", "state", "country", "remarks", "supportingDocumentReference"].map((field) =>
     body(field).optional({ values: "falsy" }).isString().withMessage("Must be text.")

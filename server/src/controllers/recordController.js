@@ -11,8 +11,34 @@ const editableFields = [
   "registrationUnitName", "registrationUnitCode", "issuingOrganization", "remarks", "supportingDocumentReference"
 ];
 
+function parseDateInput(value) {
+  if (!value) return value;
+  if (value instanceof Date) return value;
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    const match = trimmed.match(/^(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})$/);
+    if (match) {
+      const day = Number.parseInt(match[1], 10);
+      const month = Number.parseInt(match[2], 10);
+      const year = Number.parseInt(match[3], 10);
+      return new Date(Date.UTC(year, month - 1, day));
+    }
+    if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+      const [y, m, d] = trimmed.split("-").map(Number);
+      return new Date(Date.UTC(y, m - 1, d));
+    }
+  }
+  return new Date(value);
+}
+
 export const createRecord = asyncHandler(async (req, res) => {
   const values = Object.fromEntries(editableFields.map((field) => [field, req.body[field]]));
+  if (values.registrationDate !== undefined) {
+    values.registrationDate = parseDateInput(values.registrationDate);
+  }
+  if (values.dateOfOccurrence !== undefined) {
+    values.dateOfOccurrence = parseDateInput(values.dateOfOccurrence);
+  }
   const record = await Record.create({
     ...values,
     verificationId: generateVerificationId(),
@@ -64,6 +90,12 @@ export const getRecord = asyncHandler(async (req, res) => {
 
 export const updateRecord = asyncHandler(async (req, res) => {
   const values = Object.fromEntries(editableFields.filter((field) => field in req.body).map((field) => [field, req.body[field]]));
+  if (values.registrationDate !== undefined) {
+    values.registrationDate = parseDateInput(values.registrationDate);
+  }
+  if (values.dateOfOccurrence !== undefined) {
+    values.dateOfOccurrence = parseDateInput(values.dateOfOccurrence);
+  }
   values.updatedBy = req.admin.id;
   const record = await Record.findByIdAndUpdate(req.params.id, values, {
     new: true,
@@ -91,7 +123,8 @@ export const downloadQr = asyncHandler(async (req, res) => {
   const dataUrl = await generateQrDataUrl(record.verificationId);
   if (req.query.format === "preview") return res.json({ qrDataUrl: dataUrl });
   const image = Buffer.from(dataUrl.split(",")[1], "base64");
-  const name = `qr-${record.registrationNumber.replace(/[^a-z0-9_-]/gi, "-")}`;
+  const safeRegNo = String(record.registrationNumber || "record").replace(/[\r\n]+/g, " ").trim().slice(0, 60).replace(/[^a-z0-9_-]/gi, "-");
+  const name = `qr-${safeRegNo || "record"}`;
   if (req.query.format === "pdf") {
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `attachment; filename="${name}.pdf"`);

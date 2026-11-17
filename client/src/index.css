@@ -68,7 +68,8 @@ h1, h2, h3, h4, .brand-name { font-family: 'Segoe UI', Arial, sans-serif; }
 .form-section-title { color: var(--navy); font-size: 13px; font-weight: 800; margin: 0 0 17px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
 .form-label { color: #46566c; font-size: 11px; font-weight: 700; margin-bottom: 6px; }
 .form-control, .form-select { min-height: 42px; border-color: #dce2e9; border-radius: 8px; font-size: 12px; }
-textarea.form-control { min-height: 90px; }
+textarea.form-control { min-height: 42px; }
+textarea.form-control.tall { min-height: 90px; }
 .form-control:focus, .form-select:focus { border-color: #5a85b5; box-shadow: 0 0 0 .2rem rgba(23,59,103,.1); }
 .field-hint { color: var(--muted); font-size: 10px; margin-top: 4px; }
 .search-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 15px; }
@@ -81,7 +82,7 @@ textarea.form-control { min-height: 90px; }
 .detail-row { display: grid; grid-template-columns: minmax(125px, .75fr) 1.5fr; padding: 11px 0; border-bottom: 1px solid #eef1f4; gap: 12px; font-size: 12px; }
 .detail-row:last-child { border-bottom: 0; }
 .detail-row dt { color: var(--muted); font-weight: 500; }
-.detail-row dd { color: #2c3c51; margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.detail-row dd { color: #2c3c51; margin: 0; font-weight: 600; overflow-wrap: anywhere; white-space: pre-wrap; }
 .qr-preview { width: min(230px, 100%); aspect-ratio: 1; object-fit: contain; display: block; margin: 10px auto 16px; }
 .login-screen { min-height: 100vh; background: #f5f7fa; }
 .login-screen { display: grid; grid-template-columns: 1fr 1fr; }

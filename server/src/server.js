@@ -69,14 +69,30 @@ app.use("/api/admin", adminRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.info(`QR Record Verify API listening on port ${port}.`);
 });
 
-try {
-  await connectDatabase();
-} catch (error) {
-  console.error("MongoDB connection error:", error.message);
+server.on("error", (err) => {
+  console.error("Server listener error on primary port:", err.message);
+});
+
+if (!process.env.PORT && port !== 5000) {
+  try {
+    const secondaryServer = app.listen(5000, () => {
+      console.info("QR Record Verify API also listening on secondary port 5000.");
+    });
+    secondaryServer.on("error", () => {});
+  } catch {
+    // ignore
+  }
 }
+
+connectDatabase().catch((error) => {
+  console.error("MongoDB connection error:", error.message);
+});
+
+export default app;
+export { app };

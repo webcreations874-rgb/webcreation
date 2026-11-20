@@ -88,6 +88,33 @@ export default function VerifyRecord() {
   useEffect(() => {
     document.title =
       "Validate Certificate | Civil Registration System | Government of India";
+
+    // Disable right-click context menu (prevents right-click -> "Inspect")
+    const handleContextMenu = (event) => {
+      event.preventDefault();
+    };
+
+    // Disable keyboard shortcuts for DevTools / Inspect Mode
+    const handleKeyDown = (event) => {
+      const isInspectShortcut =
+        event.key === "F12" ||
+        ((event.ctrlKey || event.metaKey) &&
+          event.shiftKey &&
+          ["I", "i", "J", "j", "C", "c"].includes(event.key)) ||
+        ((event.ctrlKey || event.metaKey) && ["u", "U"].includes(event.key));
+
+      if (isInspectShortcut) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   useEffect(() => {

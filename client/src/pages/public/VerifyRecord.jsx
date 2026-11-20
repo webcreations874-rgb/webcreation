@@ -248,7 +248,7 @@ export default function VerifyRecord() {
                   )
                 }
               >
-                A-
+                A<sup>-</sup>
               </button>
 
               <button
@@ -268,7 +268,7 @@ export default function VerifyRecord() {
                   )
                 }
               >
-                A+
+                A<sup>+</sup>
               </button>
             </div>
 

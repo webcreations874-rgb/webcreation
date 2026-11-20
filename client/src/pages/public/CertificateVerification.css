@@ -241,6 +241,14 @@
   font-weight: 400;
 }
 
+.cv-font-controls button sup {
+  font-size: 80%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.45em;
+}
+
 .cv-font-controls button:hover,
 .cv-theme-toggle:hover {
   background: #edf2f7;
